@@ -1,5 +1,6 @@
 package com.project.departmentservice.service.impl;
 
+import com.project.departmentservice.mapper.AutoDepartmentMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +10,6 @@ import com.project.departmentservice.repository.DepartmentRepository;
 import com.project.departmentservice.service.DepartmentService;
 
 import lombok.AllArgsConstructor;
-
-import java.util.Optional;
 
 
 @Service  //define @service annotation  for service class
@@ -63,11 +62,25 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 
 // 2) model mapper library
-        Department department = modelMapper.map(departmentDto,Department.class);
+      /*  Department department = modelMapper.map(departmentDto,Department.class);
 
         Department savedDepartment =departmentRepository.save(department);
 
         DepartmentDto  savedDepartmentDto = modelMapper.map(savedDepartment,DepartmentDto.class);
+
+        return savedDepartmentDto;
+
+       */
+
+
+
+   // 3) mapstruct library
+       // convert DEPARTMENT DTO to JPA entity object
+    Department department= AutoDepartmentMapper.MAPPER.mapToDepartment(departmentDto);
+    Department savedDepartment = departmentRepository.save(department);
+        // convert jpa entity into deptDto
+
+        DepartmentDto savedDepartmentDto = AutoDepartmentMapper.MAPPER.mapToDepartmentDto(savedDepartment);
 
         return savedDepartmentDto;
     }
@@ -96,15 +109,23 @@ public class DepartmentServiceImpl implements DepartmentService {
         //2)model mapper library
 
 
-         Department department = departmentRepository.findByDepartmentCode(departmentCode);
+        /* Department department = departmentRepository.findByDepartmentCode(departmentCode);
 
          DepartmentDto departmentDto=modelMapper.map(department,DepartmentDto.class);
 
 
          return departmentDto;
 
+*/
 
 
+
+        // 3) mapstruct library
+
+         Department department = departmentRepository.findByDepartmentCode(departmentCode);
+         DepartmentDto departmentDto = AutoDepartmentMapper.MAPPER.mapToDepartmentDto(department);
+
+         return departmentDto;
 
 
     }

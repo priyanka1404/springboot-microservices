@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 // instead of these two annotations we can use RestController
 @RestController
 @RequestMapping("api/employees")  //// base url for all methods in the class
+
+//http://localhost:8081/api/employees
 @AllArgsConstructor
 public class EmployeeController {
     private EmployeeService employeeService;
