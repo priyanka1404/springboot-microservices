@@ -1,0 +1,74 @@
+
+Development steps
+1)create and use ResourceNotFoundException custom Exception
+2)Create error details class to hold  of the custom error response
+3)Create Global Exception Handler class to handle specific and global exceptions
+
+
+postman<-----restApi calls----->controller<------>service-- throws  exception---->spring boot default error handling-----response---->postman
+
+
+->default response will be in json format
+->but client expect customized response
+-> for that we need to follow above mentioned development steps
+
+
+postman<-----(restApi calls)----->controller<------>service-- (throws  resource not found  exception)---->Global Exception Handler( this class handles exception specific  and global exception in a single place)--response---->postman
+
+
+-> initially  by default it shows 500  internal server error
+->after the code changes  of resource not found exception it shows 404 ,not found error
+
+//specific exception handling output
+-------------------------------------
+{
+    "timeStamp": "2024-03-31T18:49:43.710468",
+    "message": "User not found with id:'9'",
+    "path": "uri=/api/users/dto/9",
+    "errorCode": "User _not_found"
+}
+
+-----------------------------------------
+
+
+// to handle specific exception like email already exists
+// create a class with  response status for emailexistsexception
+// create custom query method in user repository
+//userserviceimpl->did some modifications in create user  logic  to throw exception  if email exists
+//handle this  specific exception logic in global exception class
+
+
+// output
+{
+    "timeStamp": "2024-04-01T08:57:54.011139",
+    "message": "email already exist for a user ",
+    "path": "uri=/api/users/dto",
+    "errorCode": "User_Email _Already_Exists"
+}
+
+
+// global exception output,when we are creating user without body
+{
+    "timeStamp": "2024-04-01T09:20:46.286397",
+    "message": "Required request body is missing: public org.springframework.http.ResponseEntity<com.example.springbootrestfulwebservices.dto.UserDto> com.example.springbootrestfulwebservices.controller.UserController.createUser(com.example.springbootrestfulwebservices.dto.UserDto)",
+    "path": "uri=/api/users/dto",
+    "errorCode": "Internal_Server_Error"
+}
+
+
+
+
+
+
+development steps :
+
+1. Create ErrorDetails class to hold the custom error response
+2. Create ResourceNotFoundException in EmployeeService and use this ResourceNotFoundException in the getEmployeeById() method in EmployeeServiceImpl class
+3. Create GlobalExceptionHandler class in EmployeeService to handle specific ResourceNotFoundException and global exceptions in a single place.
+4. Create ResourceNotFoundException in DepartmentService and use this ResourceNotFoundException in the getDepartmentByCode() method in DepartmentServiceImpl class
+5. Create GlobalExceptionHandler in DepartmentService to handle specific ResourceNotFoundException and global exceptions in a single place.
+6. Host your assignment solution on GitHub and share the GitHub repository link with me so that I can review your code.
+
+
+
+

@@ -1,5 +1,6 @@
 package com.project.departmentservice.service.impl;
 
+import com.project.departmentservice.exception.ResourceNotFoundException;
 import com.project.departmentservice.mapper.AutoDepartmentMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -87,6 +88,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     // it returns department by deptcode
+
     public DepartmentDto getDepartmentByCode(String departmentCode) {
 
 
@@ -122,11 +124,23 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         // 3) mapstruct library
 
-         Department department = departmentRepository.findByDepartmentCode(departmentCode);
+        /* Department department = departmentRepository.findByDepartmentCode(departmentCode);
          DepartmentDto departmentDto = AutoDepartmentMapper.MAPPER.mapToDepartmentDto(department);
 
          return departmentDto;
+*/
+  // to handle specific  exception
+        Department department = departmentRepository.findByDepartmentCode(departmentCode);
+        if (department != null) {
 
+            DepartmentDto departmentDto = AutoDepartmentMapper.MAPPER.mapToDepartmentDto(department);
+            return departmentDto;
+        }
+
+        else{
+
+            throw  new ResourceNotFoundException("Department","departmentCode",departmentCode);
+            }
 
     }
 
