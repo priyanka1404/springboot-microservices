@@ -67,7 +67,7 @@ development steps :
 3. Create GlobalExceptionHandler class in EmployeeService to handle specific ResourceNotFoundException and global exceptions in a single place.
 4. Create ResourceNotFoundException in DepartmentService and use this ResourceNotFoundException in the getDepartmentByCode() method in DepartmentServiceImpl class
 5. Create GlobalExceptionHandler in DepartmentService to handle specific ResourceNotFoundException and global exceptions in a single place.
-6. Host your assignment solution on GitHub and share the GitHub repository link with me so that I can review your code.
+
 
 
 

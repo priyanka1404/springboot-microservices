@@ -54,27 +54,27 @@ public class DepartmentController {
     }
 
 
-    // to handle specific exception in controller
-@ExceptionHandler(ResourceNotFoundException.class) // we need to pass the exception we are going to handle
-    public ResponseEntity<ErrorDetails> resourceNotFoundException(ResourceNotFoundException exception, WebRequest webRequest)
-{
-/*we need to pass two arguments to this method
- * 1)type of exception
- *2) web request( WE NEED SOME DETAILS FROM WEB REQUEST )
- */
-
-/* we need to create the instance of error details */
-
-    ErrorDetails errorDetails = new ErrorDetails(
-            LocalDateTime.now(),
-            exception.getMessage(),
-            webRequest.getDescription(false),"User _not_found");
-
-    //if we pass true ,it will fetch client info
-
-    return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);
-    }
-
+//    // to handle specific exception in controller
+//@ExceptionHandler(ResourceNotFoundException.class) // we need to pass the exception we are going to handle
+//    public ResponseEntity<ErrorDetails> resourceNotFoundException(ResourceNotFoundException exception, WebRequest webRequest)
+//{
+///*we need to pass two arguments to this method
+// * 1)type of exception
+// *2) web request( WE NEED SOME DETAILS FROM WEB REQUEST )
+// */
+//
+///* we need to create the instance of error details */
+//
+//    ErrorDetails errorDetails = new ErrorDetails(
+//            LocalDateTime.now(),
+//            exception.getMessage(),
+//            webRequest.getDescription(false),"User _not_found");
+//
+//    //if we pass true ,it will fetch client info
+//
+//    return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);
+//    }
+//
 
 }
 
