@@ -3,6 +3,7 @@ package com.project.employeeservice.service.impl;
 
 import com.project.employeeservice.dto.EmployeeDto;
 import com.project.employeeservice.entity.Employee;
+import com.project.employeeservice.exception.ResourceNotFoundException;
 import com.project.employeeservice.mapper.AutoEmployeeMapper;
 import com.project.employeeservice.repository.EmployeeRepository;
 import com.project.employeeservice.service.EmployeeService;
@@ -69,8 +70,21 @@ public class EmployeeServiceImpl implements EmployeeService {
       */
 
         //2)map struct library
-        Optional<Employee> optionalEmployeeemployee= employeeRepository.findById(employeeId);
-        Employee employee = optionalEmployeeemployee.get();
+
+
+//        //2)map struct library
+//        Optional<Employee> optionalEmployeeemployee= employeeRepository.findById(employeeId);
+//        Employee employee = optionalEmployeeemployee.get();
+//
+//        return AutoEmployeeMapper.MAPPER.mapToEmployeeDto(employee);
+//
+//    }
+
+        // to handle  specific exception
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(
+                ()->new ResourceNotFoundException("Employee","id",employeeId)
+        );
+        //Employee employee = optionalEmployeeemployee.get();
 
         return AutoEmployeeMapper.MAPPER.mapToEmployeeDto(employee);
 
