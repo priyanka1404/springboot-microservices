@@ -16,3 +16,5 @@ Development steps:
  -> we are going t call department get rest api(department controller clas) method from employee
 
 
+// web client is recommended instead of rest template to communicate with other microservices
+

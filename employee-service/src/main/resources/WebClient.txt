@@ -1,0 +1,14 @@
+web client is  communication services between microservices
+it can be used for sync,asynch and streaming scenarios/
+it is a part od spring webflux dependency
+
+
+# Development Steps
+1)Add Spring webflux dependency
+2) configure web client as  spring bean
+3) Inject and use webclient to call the Rest API
+4) Test using Postman client
+
+
+
+
