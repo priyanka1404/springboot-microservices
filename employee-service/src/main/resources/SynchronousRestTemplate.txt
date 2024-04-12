@@ -1,0 +1,18 @@
+
+//synchronous  communication using restAPi client
+
+1) consider employee belongs to department  and employee has a uniques department code
+2) change get employee  REST API to return Employee along  with  its department in response
+
+
+Development steps:
+
+ 1)Add department code field in Employee JPA Entity
+ 2)Create DepartmentDto class
+ 3)Configure RestTemplate as Spring bean
+ 4)Inject and use RestTemplate to make REST API call in EmployeeServiceImpl class
+
+
+ -> we are going t call department get rest api(department controller clas) method from employee
+
+
