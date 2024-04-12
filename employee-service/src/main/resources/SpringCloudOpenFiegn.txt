@@ -1,0 +1,12 @@
+
+ ->SpringCloudOpenFiegn  library is part of Spring cloud framework
+ ->Declarative REST Client: Feign creates a dynamic implementation of an interface
+ decorated with JAX-RS or Spring MVC annotations
+
+ #Devlopment Steps
+ 1) Add spring cloud open Fiegn  Maven dependency to Employee-Service
+ 2)Enable Fiegn client using @EnbaleFiegnClients
+ 3)Create Feign API client
+ 4) Change the getEmployeeById method to use APIClient
+ 5)Test using Postman Client
+

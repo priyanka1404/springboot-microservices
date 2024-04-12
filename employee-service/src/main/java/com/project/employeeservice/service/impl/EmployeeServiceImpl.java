@@ -8,6 +8,7 @@ import com.project.employeeservice.entity.Employee;
 import com.project.employeeservice.exception.ResourceNotFoundException;
 import com.project.employeeservice.mapper.AutoEmployeeMapper;
 import com.project.employeeservice.repository.EmployeeRepository;
+import com.project.employeeservice.service.APIClient;
 import com.project.employeeservice.service.EmployeeService;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +28,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     //inject rest template
     // private RestTemplate restTemplate;
 
-    private WebClient webClient;
+    //private WebClient webClient;
+    private APIClient apiClient;
 
 
     @Override
@@ -105,12 +107,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         */
 
 
-        /* web client code */
+        /* web client code
           DepartmentDto departmentDto =   webClient.get()
                      .uri("http://localhost:8080/api/departments/"+ employee.getDepartmentCode())
                      .retrieve()
                      .bodyToMono(DepartmentDto.class)  // to pass response type
                      .block();  // to make a synchronous  call
+         */
+
+
+        /*  open feign client  */
+
+         DepartmentDto departmentDto= apiClient.getDeptCode(employee.getDepartmentCode());
 
 
         //Employee employee = optionalEmployeeemployee.get();
