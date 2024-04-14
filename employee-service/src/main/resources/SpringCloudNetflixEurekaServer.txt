@@ -1,0 +1,77 @@
+
+Service Registery and discovery  using netflix eureka server
+-> if there  are multiple instances for each service, we need  a mechanism to call services without hostname and portnumber
+->in cloud enivronment services may go up and down anytime.so we need automatic
+service registration and discovery mechanism
+->spring cloud provides eureka server project to create Service Registery and discovery
+
+# development steps
+1)create Spring boot project as Microservices(service-registery) ,add eureka server dependency
+->add service registery as a module to project
+(file->project structure->import module->add service registry from local->select maven->finish->module will be added
+
+2)add @EnableEurekaServer annotation// to make our spring boot application a eureka server-based service Registery
+
+3)Disable Eureka Server as Eureka Client
+// by default eureka server is also  a ,eureka client  ,so we need to disable eureka client behaviour.
+# application.properties->service registery
+
+4)Launch Eureka Server(Demo)
+//in browser ,(locahost:8761)
+// it provides user interface,were we can see all the registered services
+
+
+5)Registering Department-service a Microservice as Eureka Client
+//  we need to add eureka discovery client dependency in -> # department-service
+dependencies need to be added in pom.xml
+#pom.xml
+<dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+
+    <properties>
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
+      </properties>
+
+  <dependencyManagement>
+      <dependencies>
+        <dependency>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring-cloud-dependencies</artifactId>
+          <version>${spring-cloud.version}</version>
+          <type>pom</type>
+          <scope>import</scope>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>
+
+
+// now we  have added eureka client in department service,now department service become a eureka client
+//we need to add eureka server url in department service,
+so that department service can able to register with eureka server url
+
+# application.properties->department-service
+// we can find below link console
+Replica node URL:  http://localhost:8761/eureka/
+
+// in spring boot no longer using @EnableEurekaClient
+
+6)Run department-Service Eureka Client(Demo)
+7)Registering Employee-Service Microservice as Eureka Client
+8)Run employee-service Eureka Client(Demo)
+
+9)Multiple Instances of Department Service
+
+//create a jar file of this project  and run jar file in different ports
+
+department service->maven->lifecycle->package-> it will generate jar file in target folder
+-in  terminal-> go to department service directory
+cd department-service
+ java -jar -Dserver.port=8082 target/department-service-0.0.1-SNAPSHOT.jar
+ ->this instance will  registered in eureka server
+
+
+-------------------here loading balancing is required------------------
+->when employee service is accessing department  service,due to some reasons,
+if instance of dept-service is down,it should call another instance based on availability

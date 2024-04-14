@@ -19,6 +19,7 @@
 		<org.projectlombok.version>1.18.30</org.projectlombok.version>
 		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 		<spring-cloud.version>2023.0.1</spring-cloud.version>
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -66,6 +67,12 @@
 			<artifactId>mapstruct</artifactId>
 			<version>${org.mapstruct.version}</version>
 		</dependency>
+
+		<!--Eureka client dependency -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
 	</dependencies>
     <!-- Spring cloud open feign-->
 	<dependencyManagement>
@@ -79,6 +86,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 
 
 	<build>
