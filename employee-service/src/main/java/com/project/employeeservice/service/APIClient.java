@@ -7,7 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(url ="http://localhost:8080",value ="DEPARTMENT-SERVICE")
+//@FeignClient(url ="http://localhost:8080;http://localhost:8082",value ="DEPARTMENT-SERVICE")
+@FeignClient(name="DEPARTMENT-SERVICE")
 // open feign client library dynamically create implementation for this library
 public interface APIClient {
 

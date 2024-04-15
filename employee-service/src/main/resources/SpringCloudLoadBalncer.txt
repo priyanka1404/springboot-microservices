@@ -1,0 +1,32 @@
+
+
+
+Employee-service(open feign- to make rest api call)--------------Department service(8080,8082-multiple instances)
+
+->two services registered as client in eureka server
+->Eureka server internally provides spring cloud  load balancer module
+-> this module will automatically handles  load balancing between multiple instances
+
+->in API client interface
+ modify the url,instead of adding multiple urls for multiple instances,
+@FeignClient(url ="http://localhost:8080",value ="DEPARTMENT-SERVICE")
+
+->we can use the id of the client which registered in eureka server
+
+@FeignClient(Name ="DEPARTMENT-SERVICE")
+
+
+department-instances(8082,8080)
+http://localhost:8082/api/departments/EC003
+http://localhost:8080/api/departments/EC003
+
+
+http://localhost:8081/api/employees/13
+
+
+to shutdown(remove the instance in eureka server)
+cd department-service
+ java -jar -Dserver.port=8082 -Dspring.cloud.discovery.enabled=false target/department-service-0.0.1-SNAPSHOT.jar
+
+
+
