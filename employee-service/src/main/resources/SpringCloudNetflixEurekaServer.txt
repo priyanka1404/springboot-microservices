@@ -72,6 +72,6 @@ cd department-service
  ->this instance will  registered in eureka server
 
 
--------------------here loading balancing is required------------------
+-------------------here load balancing is required------------------
 ->when employee service is accessing department  service,due to some reasons,
 if instance of dept-service is down,it should call another instance based on availability
