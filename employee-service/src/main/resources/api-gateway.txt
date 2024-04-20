@@ -1,0 +1,71 @@
+development steps
+1) create spring boot project as microservice(api-gateway)
+
+dependencies
+->gateway
+->eureka discovery client
+->actuators
+
+2)register API- gateway as Eureka client to eureka server(service registery)
+3)configuring API gateway routes and test using postman client
+
+client---->API-GATEWAY----->SERVICE -REGISTRY-------->(Department,Employee)
+
+->api gateway basically uses service registery(has microservices registered) to discover hostname and port number
+->API gateway route request to corresponding microservices
+
+
+->we can configure routes in  2 ways
+1)properties(we use)
+2)programatically
+
+
+
+
+application.properties
+
+
+spring.application.name=api-gateway
+
+server.port=9191
+
+eureka.instance.client.serverUrl.defaultZone=http://localhost:8761/eureka/
+management.endpoints.web.exposure.include**
+
+#routes for employee service
+
+spring.cloud.gateway.routes[0].id = EMPLOYEE-SERVICE
+spring.cloud.gateway.routes[0].uri= lb://EMPLOYEE-SERVICE
+#api gateway will use eureka to route particular request to particular service
+# we can use alternate http://localhost:8081
+
+spring.cloud.routes[0].predicates[0]=Path=/api/employees/**
+#** for id here
+
+#api/employees its a destination url-it will predicate based on destination url
+
+
+# http://localhost:9191/api/employees-> whenever client make request to api-gateway  using this url
+#then api-gateway will route this request to employee-service-> http://localhost:9191/api/employees
+
+
+
+#routes for department e service
+
+spring.cloud.gateway.routes[1].id = DEPARTMENT-SERVICE
+spring.cloud.gateway.routes[1].uri= lb://DEPARTMENT-SERVICE
+#api gateway will use eureka to route particular request to particular service
+# we can use alternate http://localhost:8080
+
+spring.cloud.routes[1].predicates[0] = Path=/api/departments/**
+#** for id here
+#api/employees its a destination url-it will predicate based on destination url
+
+
+# http://localhost:9191/api/employees-> whenever client make request to api-gateway  using this url
+#then api-gateway will route this request to employee-service-> http://localhost:9191/api/employees
+
+
+
+
+
