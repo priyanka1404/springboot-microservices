@@ -68,4 +68,33 @@ spring.cloud.routes[1].predicates[0] = Path=/api/departments/**
 
 
 
+******************************
+## Routes for Employee Service
+spring.cloud.gateway.routes[0].id=EMPLOYEE-SERVICE
+spring.cloud.gateway.routes[0].uri=lb://EMPLOYEE-SERVICE
+spring.cloud.gateway.routes[0].predicates[0]=Path=/api/employees/**
 
+## Routes for Department Service
+spring.cloud.gateway.routes[1].id=DEPARTMENT-SERVICE
+spring.cloud.gateway.routes[1].uri=lb://DEPARTMENT-SERVICE
+spring.cloud.gateway.routes[1].predicates[0]=Path=/api/departments/**
+*******************************************************
+
+
+
+
+
+
+
+*******using  spring cloud gateway to automatically create routes***********
+
+#DEVELOPMENT STEPS:
+
+1)create spring boot project as microservice(api-gateway)
+2)register API -Gateway  as eureka client  to eureka server (service-regisgtery)
+3)configuring API gateway routes and Test using postman client
+4)using spring cloud  gateway to automatically create routes
+
+
+BETETR TO PREFER MANUAL APPROACH
+in automatic  discovery mechanism,we need to give  service name in url
