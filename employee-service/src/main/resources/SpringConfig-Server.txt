@@ -1,0 +1,54 @@
+#development steps
+
+1.create spring boot project as microservice (config server)
+dependencies:
+->actuators
+->spring discovery client
+->config server
+@Enableconfig server in main class to act as cloud config server
+
+2.Register config-server as eureka client
+
+3.set up git location for config server
+-  we need to create a config-server(new  repo) in  git
+- copy the url and add in the config server  project
+application.properties:
+- so we will configure git location in config-server
+- we need to clone the repo
+- usually we will have two branches  master and main
+- we will keep all config files master branch
+
+4.refactor department-service to use config server
+
+
+->we need to add  this service  as config client  in config server .so config server  it will load all the config files from git repo
+
+Employee,department (config client)-------->Spring cloud config server------------->github
+config clients will load configuration--- from ---config server --from--git
+
+-------dependencies need to be added in  department service---
+1) config client
+2)actuator
+-> need to be created ,project specific config file in git repo,whatever the configuration available in application.properties
+->application name and file name should be same,here name is department-service not a case sensitive
+->we are commenting out the configurations in applications.properties ,except application name
+->we need to add config server url in department service ,it will load configuration from config server
+
+
+
+5.refactor employee-service to use config server
+
+
+
+
+6.refresh usecase
+1)whenever we change configuration file then we dont have to restart the microservcie and its instance
+2)we need to call spring boot actuator/refresh API to reload the updated values from config server
+
+here we are tested by creating rest controller in dept
+
+we created message method
+-> we upadted config file in git
+enabled rest end point sin dept application .properties
+without executing
+adding actuator/refresh in postman-leads to affect the changes ,we no need to restart microservice
