@@ -48,7 +48,17 @@ config clients will load configuration--- from ---config server --from--git
 here we are tested by creating rest controller in dept
 
 we created message method
--> we upadted config file in git
+-> we updated config file in git
 enabled rest end point sin dept application .properties
 without executing
 adding actuator/refresh in postman-leads to affect the changes ,we no need to restart microservice
+
+--------------------problems with spring config server---------------------------------
+-> inorder to reload the config changes in config  client application(dept and employee)
+we need to trigger/refresh endpoint manually.
+this is not practical and viable,if you have large number of application
+
+
+--->spring cloud bus module provides a solution
+-> spring cloud bus module can be used to link multiple applications with a message broker(rabbit mq,kafka)
+ and we can broad cast configuration changes

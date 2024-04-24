@@ -1,0 +1,51 @@
+
+--->spring cloud bus module provides a solution
+-> spring cloud bus module can be used to link multiple applications with a message broker(rabbit mq,kafka)
+ and we can broad cast configuration changes.
+
+
+ #Development Steps:
+
+(Bus refresh)----------message broker(Rabbit MQ)------(subscribe)----(emp,dept)------config server---git(emp.properties,dept.properties)
+ |
+ actuator to trigger  the broadcast  event to microservices to reflect the changes made in git config
+
+ 1) Add spring-cloud-starter-bus-amqp dependency to department service and employee service
+ 2)install RabbitMQ using Docker
+ -> install docker desktop application
+ -> pull rabbit mq image from docker hub to local machine
+ -> open docker hub ,look for latest rabbitmq vesrion
+ ->open terminal and use cmnd :
+  -> docker pull rabbitmq:3.13.1    ->pull rabbit mq image from docker hub to local machine
+ ->docker run --rm -it -p 5672:5672 rabbitmq:3.13.1  -> it will start running on  port 5672
+
+
+ 3)RabbitMQ configuration in application.properties of dept and emp services
+ ->add the default  rabbitmq config in application.properties
+ spring.rabbitmq.host=localhost
+ spring.rabbitmq.port =5672
+ spring.rabbitmq.username = guest
+ spring.rabbitmq.password = guest
+
+ 4)Create Simple RestAPI  in employee-service
+ ->created message controller
+ ->added message in emp.properties.git
+ -> stop and rerun both services
+ ->tested using postman,both messages are displaying
+
+ 5)change dept-service and emp-service properties file and call/bus refresh
+ -> change the  properties in both files in git
+ ->goto postman
+ ->  post -http://localhost:8080/actuator/busrefresh  - dept(to broad cast the config changes to respective  microservice)
+ ->  post - http://localhost:8081/actuator/busrefresh - emp
+
+ ->GET -http://localhost:8080/message -dept
+ ->GET-http://localhost:8080/users/message -emp
+
+ ->we haven't restarted microservices,but config  changes are reflecting
+
+
+
+
+
+

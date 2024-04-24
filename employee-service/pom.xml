@@ -35,6 +35,13 @@
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 
+		<!---spring cloud bus dependency-->
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+		</dependency>
+
 
 		<!-- adding spring webflux dependency -->
 
