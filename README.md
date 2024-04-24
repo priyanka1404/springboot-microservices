@@ -11,3 +11,9 @@ config server:
 
 <img width="1155" alt="Screenshot 2024-04-22 at 7 51 19 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/0a617527-4b86-49fa-aa7c-202b86a461fe">
 <img width="1155" alt="Screenshot 2024-04-22 at 7 51 02 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/59b47c1b-bd8a-4a35-98d7-871e0649868b">
+
+
+spring cloud bus:
+
+<img width="1155" alt="Screenshot 2024-04-22 at 7 51 19 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/c6926dff-0421-47e1-acde-dee84de6a0b1">
+<img width="1155" alt="Screenshot 2024-04-22 at 7 51 02 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/a6c278d6-f9c9-4d85-bc59-0a3b0208aa54">
