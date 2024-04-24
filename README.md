@@ -15,5 +15,6 @@ config server:
 
 spring cloud bus:
 
-<img width="1155" alt="Screenshot 2024-04-22 at 7 51 19 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/c6926dff-0421-47e1-acde-dee84de6a0b1">
-<img width="1155" alt="Screenshot 2024-04-22 at 7 51 02 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/a6c278d6-f9c9-4d85-bc59-0a3b0208aa54">
+<img width="824" alt="Screenshot 2024-04-23 at 7 42 24 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/f3494128-fac6-4acd-a267-50a170af0f58">
+<img width="824" alt="Screenshot 2024-04-23 at 7 41 16 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/201171de-dc1b-499d-802f-e7861f8146d5">
+
