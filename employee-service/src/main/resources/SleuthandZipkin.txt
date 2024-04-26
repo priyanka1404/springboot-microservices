@@ -1,0 +1,83 @@
+spring cloud sleuth - is used to for distributed tracing
+
+->to trace request from start to end
+-> to compute how much time,each microservice will consume to process the request
+zipkin-to visualize the trace info using  UI
+client->api gateway->employee->department
+this will be the entire request flow
+each micro service will have unique span id
+entire request will have same trace id
+
+
+Spring Boot 3 distributed tracing with Micrometer (alternative to Sleuth) and Zipkin
+Step 1:  Add the following Micrometer-related Maven dependencies to your microservices.
+
+<dependency>
+	<groupId>io.micrometer</groupId>
+	<artifactId>micrometer-observation</artifactId>
+</dependency>
+<dependency>
+	<groupId>io.micrometer</groupId>
+	<artifactId>micrometer-tracing-bridge-brave</artifactId>
+</dependency>
+<dependency>
+	<groupId>io.zipkin.reporter2</groupId>
+	<artifactId>zipkin-reporter-brave</artifactId>
+</dependency>
+<dependency>
+	<groupId>io.github.openfeign</groupId>
+	<artifactId>feign-micrometer</artifactId>
+</dependency>
+
+->micrometer-observation dependency will allow us to collect and report metrics from our application to Zipkin.
+
+->micrometer-tracing-bridge-brave dependency will allow us to trace our spring boot application.
+
+->zipkin-reporter-brave dependency allows us to send traces that we collect to Zipkin.
+
+->feign-micrometer dependency was added because I am using feign in my microservices to call other APIs.
+This dependency will configure the micrometer to work with feign.
+
+
+
+ ####If you are using a Mac with an M1 processor, we will  get the
+  following error: ERROR [employee-service, , ] 4877 --- [ender@5b0e5d5f}] i.n.r.d.DnsServerAddressStreamProviders : Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+
+Do not worry, just add the following dependency to your microservices:
+
+<!-- Fix MAC OS M1 issue -->
+<dependency>
+	<groupId>io.netty</groupId>
+	<artifactId>netty-resolver-dns-native-macos</artifactId>
+	<classifier>osx-aarch_64</classifier>
+</dependency>
+
+
+Step 2: You will also have to configure your application.properties files (employee service and department service).
+
+For application.properties file:
+
+management.tracing.sampling.probability=1.0
+logging.pattern.level=%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]
+logging.level.org.springframework.web=DEBUG
+1. management.tracing.sampling.probability=1.0 -
+ Default value is 0.1 i.e mean only 10% of the REST Calls will be traced. 1.0 Will trace each REST Call and get a display.
+
+2. logging.pattern.level=%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]
+
+With this logging pattern the REST call Trace ID and Span ID will be known and can be searched on ZipKin web page.
+
+3. logging.level.org.springframework.web=DEBUG - In depth logs are known, which are helpful for testing and debuging.
+
+Step 4: Start your applications and try to send a request to employee or department service.
+ Now, open in the browser Zipkin at http://127.0.0.1:9411/ and press the button Run Query.
+
+->docker pull openzipkin/zipkin
+->docker run --rm -it --name zipkin -p 9411:9411 openzipkin/zipkin
+->Start your applications and try to send a request to employee or department service.
+Now, open in the browser Zipkin at http://127.0.0.1:9411/ and press the button Run Query.
+
+
+
+
+
