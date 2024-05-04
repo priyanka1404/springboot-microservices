@@ -1,0 +1,38 @@
+
+#Retry pattern implementation with Resilience4J
+Client----------->API gateway<------>EmployeeService(applying retry pattern)<------------>DepartmentService
+
+# retry patter will retry to send the request as mentioned times
+
+#DevelopmentSteps:
+1)Using @Retry annotation to a method(it is calling to external service)
+
+ @Retry(name = "${spring.application.name}",fallbackMethod="getDefaultDepartment")
+
+2)Fall back method implementation
+
+
+3)Add  retry configuration in application.properties file
+
+# Retry  pattern configuration
+resilience4j.retry.instances.EMPLOYEE-SERVICE.registerHealthIndicator=true
+resilience4j.retry.instances.EMPLOYEE-SERVICE.maxRetryAttempts=5
+# by default attempts will be 3
+resilience4j.retry.instances.EMPLOYEE-SERVICE.waitDuration=1s
+
+4)Restart employee-service and demo
+
+Add some loogers in empserviceimpl
+
+after 5s it will return fall back method
+it will wait duration 1sec for each call
+default retry =3
+
+
+we can check in logs.how many times it retried to call and after that it will call default method
+
+
+
+
+
+
