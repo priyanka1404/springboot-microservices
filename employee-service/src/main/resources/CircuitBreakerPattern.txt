@@ -1,0 +1,105 @@
+
+
+client---->ms1---dependent-on -->ms2--- dependent-on --->ms3-- dependent-on -->ms4
+-
+->fall back method:it will try to request ,if microservice is down,it will return fall back method
+->circuit breaker pattern : it will  not allow to hit the request to microservice,when it is down
+-> retry-> it will  retry  sending requests and return success  response
+->rate limiter:will limit the  number of requests from one microservice to another microservice
+
+
+ How circuit breaker pattern works :
+
+-> it will have 3 states
+
+
+closed ----- (threshold>50)----->open<------------>half open
+
+
+if employee service sends request to dept more  than 5 time
+-> in that if two  responses are success and 3 are failure
+-> so threshold> 50 -> it moves to open state
+-> automatically after some time by default it move  half-open state but it will have only 3 chances left
+-> from half-open state  it will send request from emp to dept
+-> if it  is success that state changed to  closed ,if not it will again move back to open.
+
+
+-> circuit breaker is used to send a default response to client whenever the microservices are down
+
+
+circuit breaker pattern  implementation using Resilience4J
+#Development Steps
+1) Add dependencies
+
+# dependencies(emp )
+
+
+<dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+    </dependency>
+
+    <dependency>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-starter-actuator</artifactId>
+    		</dependency>
+
+
+# to health endpoint to monitor circuit breaker states
+
+
+    		<dependency>
+                			<groupId>org.springframework.boot</groupId>
+                			<artifactId>spring-boot-starter-aop</artifactId>
+                		</dependency>
+
+
+
+  #aop to get the logging information and metrics information
+
+
+
+
+
+2)Using @circuitBreaker annotation to method ( it is calling external service)
+
+@CircuitBreaker(name = "${spring.application.name}",fallbackMethod="getDefaultDepartment")
+add above annotation to this method : get employee method in employeeserviceimpl
+
+3)Fall back method implementation
+-> we need to create default department instance in fallback method in empserviceimpl class
+
+4)Add circuit breaker configuration in application.properties
+
+#actuataor  end points for circuit breaker
+
+management.health.circuitbreakers.enabled=true
+management.endpoints.web.exposure.include=health
+management.endpoint.health.show-details=always
+
+#circuit breaker configuration
+resilience4j.circuitbreaker.instances.EMPLOYEE-SERVICE.registerHealthIndicator=true
+resilience4j.circuitbreaker.instances.EMPLOYEE-SERVICE.failureRateThreshold=50
+resilience4j.circuitbreaker.instances.EMPLOYEE-SERVICE.minimumNumberOfCalls=5
+resilience4j.circuitbreaker.instances.EMPLOYEE-SERVICE.automaticTransitionFromOpenToHalfOpenEnabled=true
+resilience4j.circuitbreaker.instances.EMPLOYEE-SERVICE.waitDurationInOpenState=5s
+resilience4j.circuitbreaker.instances.EMPLOYEE-SERVICE.permittedNumberOfCallsInHalfOpenState=3
+resilience4j.circuitbreaker.instances.EMPLOYEE-SERVICE.slidingWindowSize=10
+resilience4j.circuitbreaker.instances.EMPLOYEE-SERVICE.slidingWindowType=COUNT_BASED
+
+
+5)Restart employee-demo service
+
+
+localhost:8081/actuator/health
+it will show circuit breaker status
+
+
+http://localhost:9191/api/employees/2
+
+returns fall back method
+
+
+
+
+
