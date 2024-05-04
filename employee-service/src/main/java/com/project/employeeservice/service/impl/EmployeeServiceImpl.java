@@ -12,7 +12,10 @@ import com.project.employeeservice.service.APIClient;
 import com.project.employeeservice.service.EmployeeService;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,6 +24,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeServiceImpl.class);
     private EmployeeRepository employeeRepository;
 
     //inject rest template
@@ -66,13 +70,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
-    @CircuitBreaker(name = "${spring.application.name}",fallbackMethod="getDefaultDepartment")
+    //@CircuitBreaker(name = "${spring.application.name}",fallbackMethod="getDefaultDepartment")
+    //retry pattern
+    @Retry(name = "${spring.application.name}",fallbackMethod="getDefaultDepartment")
     @Override
     public APIResponseDto getEmpById(Long employeeId) {
 
-
+        LOGGER.info("inside getEmployeeById() method");
      /*   Employee employee= employeeRepository.findById(employeeId).get();
-        // convert convert obtained jpa entity into dto
+        //  convert obtained jpa entity into dto
         EmployeeDto employeeDto = new EmployeeDto(employee.getId(),
                                                   employee.getFirstName(),
                                                   employee.getLastName(),
@@ -137,6 +143,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public APIResponseDto getDefaultDepartment(Long employeeId,Exception exception) {
 
+        LOGGER.info("inside getDefaultDepartment() method");
         Employee employee = employeeRepository.findById(employeeId).get();
 
         DepartmentDto departmentDto =new DepartmentDto();
