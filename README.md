@@ -1,3 +1,4 @@
+<img width="824" alt="Screenshot 2024-05-13 at 12 45 42 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/59c627a3-eb82-4414-803e-5bf38c55ff47">
 synchronous communication
 # rest template
 
@@ -17,4 +18,9 @@ spring cloud bus:
 
 <img width="824" alt="Screenshot 2024-04-23 at 7 42 24 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/f3494128-fac6-4acd-a267-50a170af0f58">
 <img width="824" alt="Screenshot 2024-04-23 at 7 41 16 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/201171de-dc1b-499d-802f-e7861f8146d5">
+
+Employee-> department->organization mapping
+
+<img width="824" alt="Screenshot 2024-05-13 at 12 45 42 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/74ec7205-74a1-4600-80b1-9f22b5fadd94">
+
 
