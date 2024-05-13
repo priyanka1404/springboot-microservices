@@ -1,4 +1,4 @@
-<img width="824" alt="Screenshot 2024-05-13 at 12 45 42 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/59c627a3-eb82-4414-803e-5bf38c55ff47">
+
 synchronous communication
 # rest template
 
