@@ -1,6 +1,7 @@
 package com.project.employeeservice.service;
 
 import com.project.employeeservice.dto.DepartmentDto;
+import com.project.employeeservice.dto.OrganizationDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,5 +19,5 @@ public interface APIClient {
     @GetMapping("api/departments/{department-code}")
     DepartmentDto getDeptCode(@PathVariable("department-code") String departmentCode);
 
-
 }
+

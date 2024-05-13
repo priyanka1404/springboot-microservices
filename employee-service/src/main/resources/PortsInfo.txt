@@ -1,0 +1,7 @@
+API Gateway->9191
+dept-> 8084
+emp-> 8085
+config-server->8884
+org->8083
+service -registery-> 8762
+zipkin server->9411

@@ -4,21 +4,20 @@ package com.project.employeeservice.service.impl;
 import com.project.employeeservice.dto.APIResponseDto;
 import com.project.employeeservice.dto.DepartmentDto;
 import com.project.employeeservice.dto.EmployeeDto;
+import com.project.employeeservice.dto.OrganizationDto;
 import com.project.employeeservice.entity.Employee;
 import com.project.employeeservice.exception.ResourceNotFoundException;
 import com.project.employeeservice.mapper.AutoEmployeeMapper;
 import com.project.employeeservice.repository.EmployeeRepository;
 import com.project.employeeservice.service.APIClient;
+import com.project.employeeservice.service.APIOrgClient;
 import com.project.employeeservice.service.EmployeeService;
 
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -32,6 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     //private WebClient webClient;
     private APIClient apiClient;
+    private APIOrgClient apiOrgClient;
 
 
     @Override
@@ -124,7 +124,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         /*  open feign client  */
 
          DepartmentDto departmentDto= apiClient.getDeptCode(employee.getDepartmentCode());
-
+        OrganizationDto organizationDto= apiOrgClient.getOrganizationCode(employee.getOrganizationCode());
 
         //Employee employee = optionalEmployeeemployee.get();
 
@@ -135,7 +135,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         apiResponseDto.setEmployee(employeeDto);
         apiResponseDto.setDepartment(departmentDto);
-
+        apiResponseDto.setOrganization(organizationDto);
+        LOGGER.info("inside setOrganization  method");
         return apiResponseDto;
 
     }
