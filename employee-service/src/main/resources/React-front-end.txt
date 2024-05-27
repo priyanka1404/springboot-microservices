@@ -1,0 +1,29 @@
+
+React ----(axios)----->API Gateway<-----(Route)------>Employee Service----->(Dept,Org)
+
+React  is a javascript library to develop UI pages(Single page application)
+-> TO  make rest api call in  react  we need to use third party library (Axios)
+->we are uisng creat react app tool
+
+# Development steps
+
+1)Create React APP using ->Create React APP tool
+2)Adding Bootstrap in React using NPM
+3)Connecting React app with API gateway(Rest API call)
+4)Develop a React component  to display user,department and org details
+5)Run React APP and Demo
+
+we need tO Add (cros config) in api gate way config file-> to run on multiple ports
+
+-> we have two types of components
+1)class component
+2)functional component
+
+-> plain java  script objects ,props can be passed between parent and child
+->this statement ,for the current class
+
+by deafult it run on localhost:3000
+
+
+
+
