@@ -23,4 +23,12 @@ Employee-> department->organization mapping
 
 <img width="824" alt="Screenshot 2024-05-13 at 12 45 42 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/74ec7205-74a1-4600-80b1-9f22b5fadd94">
 
+API-GATEWAY 
+<img width="894" alt="Screenshot 2024-05-27 at 1 52 33 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/4e3f95b5-32cf-458e-bd81-b239a72f1ce9">
+
+React Front-end
+<img width="1126" alt="Screenshot 2024-05-27 at 1 48 01 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/92b43229-8be8-4b5d-9d60-41f0c8d03898">
+
+
+
 
