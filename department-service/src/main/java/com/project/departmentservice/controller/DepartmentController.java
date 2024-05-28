@@ -2,6 +2,9 @@ package com.project.departmentservice.controller;
 
 import com.project.departmentservice.exception.ErrorDetails;
 import com.project.departmentservice.exception.ResourceNotFoundException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import com.project.departmentservice.dto.DepartmentDto;
@@ -18,7 +21,16 @@ import java.time.LocalDateTime;
 
 //@Controller
 //@ResponseBody
-// instead of these two annotations we can use RestController 
+// instead of these two annotations we can use RestController
+
+
+// swagger rest api annotation
+@Tag(  //Customizing Swagger API Documentation with Annotation
+        name = "Department Service - DepartmentController",
+        description =" DepartmentController  exposes Rest API's for Department service"
+)
+
+
 @RestController
 @RequestMapping("api/departments") // base url for all methods in the class
 @AllArgsConstructor
@@ -28,6 +40,17 @@ public class DepartmentController {
 
     //build save department Rest API
 
+
+    // to provide summary for documentation
+    @Operation(
+       summary = "Save Department Rest API",
+            description ="Save Department Rest API is used to save department object in a database"
+    )
+    // to provide response in documentation
+    @ApiResponse(
+            responseCode = "201",
+            description = "HTTP status 201 CREATED"
+    )
     @PostMapping
     // to make method as restapi we are using spring annotation
 
@@ -43,6 +66,16 @@ public class DepartmentController {
         return new ResponseEntity<>(savedDepartment, HttpStatus.CREATED);
     }
 
+    // to provide summary for documentation
+    @Operation(
+            summary = "Get Department Rest API",
+            description ="Get Department Rest API is used to get  department object in a database"
+    )
+    // to provide response in documentation
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP status 200 SUCCESS"
+    )
 
     //build get  department Rest API
     @GetMapping("{department-code}")

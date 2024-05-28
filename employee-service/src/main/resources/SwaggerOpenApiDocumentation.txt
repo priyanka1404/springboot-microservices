@@ -1,0 +1,71 @@
+
+Open api
+
+#development steps
+1)Adding Spring doc-openAPI maven dependency
+->dependency from maven
+(SpringDoc OpenAPI Starter WebMVC UI)
+<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+<dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>2.5.0</version>
+</dependency>
+
+# inside this ,there will be more core and swagger dependencies included
+
+http://localhost:8092/swagger-ui/index.html---> ui(dept)
+http://localhost:8092/v3/api-docs----->json format
+
+2)defining general API information (Using annotations)
+ in main class:
+@OpenAPIDefinition(  //Defining General API information (Using Annotations)-for sagger rest api
+		info = @Info(
+				title = "Spring boot Rest API  documentation",
+				description= "Department Service rest API documentation ",
+				version="v1.0",
+				contact=@Contact(
+						name = "priyanka",
+						email="priyankareddynomula111@gmail.com",
+						url="https://github.com/priyanka1404 " // we can provide our website information
+				),
+				license=@License(
+						name = "Apache2.0"
+						//url="http "
+				)
+		),
+		// external docs
+		externalDocs = @ExternalDocumentation(
+				description =  "Spring Boot Department Documentation"
+				//url= " "
+		)
+)
+
+
+
+3)Customizing Swagger API documentation with annotations
+
+// to provide summary for documentation
+for post and getmapping
+
+    @Operation(
+       summary = "Save Department Rest API",
+            description ="Save Department Rest API is used to save department object in a database"
+    )
+    // to provide response in documentation
+    @ApiResponse(
+            responseCode = "201/200(for get)",
+            description = "HTTP status 201/200 CREATED/ok"
+    )
+
+
+4)Customizing Swagger models documentation with annotations
+
+-> in dto class
+
+@Schema( //// swagger rest api annotation
+        description="Department  model information"
+)
+
+we can describe each field as well
+provide description for schemas in swagger ui
