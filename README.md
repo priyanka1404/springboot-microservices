@@ -29,6 +29,18 @@ API-GATEWAY
 React Front-end
 <img width="1126" alt="Screenshot 2024-05-27 at 1 48 01 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/92b43229-8be8-4b5d-9d60-41f0c8d03898">
 
+Swagger open-API documentation for department  service
+<img width="1188" alt="Screenshot 2024-05-27 at 11 57 17 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/7976b47a-36f5-4553-90eb-9007226b01a1">
+
+<img width="1226" alt="Screenshot 2024-05-27 at 11 57 46 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/46a59f89-abb0-45ff-94ac-c296a81dde59">
+
+<img width="1226" alt="Screenshot 2024-05-27 at 11 58 07 PM" src="https://github.com/priyanka1404/springboot-microservices/assets/71031840/0eb86425-be4b-4813-a307-e6462a9d1e12">
+
+
+
+
+
+
 
 
 
