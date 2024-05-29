@@ -46,7 +46,15 @@ http://localhost:8092/v3/api-docs----->json format
 3)Customizing Swagger API documentation with annotations
 
 // to provide summary for documentation
-for post and getmapping
+ IN CONTROLLER CLASS
+ // ABOVE THE CLASS
+// swagger rest api annotation
+@Tag(  //Customizing Swagger API Documentation with Annotation
+        name = "Department Service - DepartmentController",
+        description =" DepartmentController  exposes Rest API's for Department service"
+)
+
+for post and getmapping methods
 
     @Operation(
        summary = "Save Department Rest API",

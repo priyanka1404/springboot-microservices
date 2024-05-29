@@ -7,6 +7,9 @@ import com.project.employeeservice.dto.EmployeeDto;
 import com.project.employeeservice.exception.ErrorDetails;
 import com.project.employeeservice.exception.ResourceNotFoundException;
 import com.project.employeeservice.service.EmployeeService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,12 @@ import java.time.LocalDateTime;
 //@Controller
 //@ResponseBody
 // instead of these two annotations we can use RestController
+
+// swagger rest api annotation
+@Tag(  //Customizing Swagger API Documentation with Annotation
+        name = "Employee Service - EmployeeController",
+        description =" EmployeeController  exposes Rest API's for Employee service"
+)
 @RestController
 @RequestMapping("api/employees")  //// base url for all methods in the class
 
@@ -29,6 +38,15 @@ public class EmployeeController {
 
     //build save department Rest API
 
+    @Operation(
+            summary = "Save Employee Rest API",
+            description ="Save Employee Rest API is used to save Employee object in a database"
+    )
+    // to provide response in documentation
+    @ApiResponse(
+            responseCode = "201",
+            description = "HTTP status 201 CREATED"
+    )
 
     @PostMapping
     // to make method as restapi we are using spring annotation
@@ -46,6 +64,17 @@ public class EmployeeController {
        return new ResponseEntity<>(saveemployee , HttpStatus.CREATED);
     }
 
+
+
+    @Operation(
+            summary = "Get Employee Rest API",
+            description ="Get Employee Rest API is used to Get Employee object in a database"
+    )
+    // to provide response in documentation
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP status 200 ok"
+    )
     //build get employee restapi
 
     @GetMapping("{id}")
